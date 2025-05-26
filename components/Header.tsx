@@ -1,12 +1,15 @@
 'use client'
 
-import { cn } from '@/lib/utils'
+import { cn, getInitials } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Avatar, AvatarImage } from './ui/avatar'
+import { AvatarFallback } from '@radix-ui/react-avatar'
+import { Session } from 'next-auth'
 
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
 
   const pathname = usePathname()
 
@@ -16,7 +19,7 @@ const Header = () => {
         <Image src={'/icons/logo.svg'} alt='logo' width={40} height={40}/>
       </Link>
 
-      <ul className='flex flex-row items-center gap-5'>
+      <ul className='flex flex-row items-center gap-8'>
         <li>
           <Link 
             href={'/library'} 
@@ -25,7 +28,18 @@ const Header = () => {
             Library
           </Link>
         </li>
+
+        <li>
+          <Link href={'/my-profile'}>
+            <Avatar>
+              <AvatarFallback className='bg-amber-100'>
+                {getInitials(session?.user?.name || 'IN')}
+              </AvatarFallback>
+            </Avatar>
+          </Link>
+        </li>
       </ul>
+
     </header>
   )
 }

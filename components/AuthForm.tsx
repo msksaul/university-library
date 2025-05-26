@@ -2,13 +2,15 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { DefaultValues, FieldValues, Path, SubmitHandler, useForm, UseFormReturn } from "react-hook-form"
-import z, { ZodType } from 'zod'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
+import { ZodType } from 'zod'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
 import Link from 'next/link'
 import { Input } from './ui/input'
 import { FIELD_NAMES, FIELD_TYPES } from '@/app/constants'
 import ImageUpload from './ImageUpload'
 import { Button } from './ui/button'
+import { toast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>
@@ -19,6 +21,8 @@ interface Props<T extends FieldValues> {
 
 const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit }: Props<T>) => {
 
+  const router = useRouter()
+
   const isSignIn = type === 'SIGN_IN'
 
   const form: UseFormReturn<T> = useForm({
@@ -27,7 +31,26 @@ const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit
   })
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data)
 
+    if(result.success) {
+      toast({
+        title: 'Success',
+        description: isSignIn
+          ? 'You have successfully signed in'
+          : 'You have successfully signed up'
+      })
+
+      router.push('/')
+    }
+    else {
+      toast({
+        title: `Error ${isSignIn ? 'signing in' : 'signing up'}`,
+        description: isSignIn
+          ? 'You have successfully signed in'
+          : 'You have successfully signed up'
+      })
+    }
   }
 
   return (
