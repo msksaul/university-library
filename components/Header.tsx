@@ -4,7 +4,7 @@ import { cn, getInitials } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Avatar, AvatarImage } from './ui/avatar'
+import { Avatar } from './ui/avatar'
 import { AvatarFallback } from '@radix-ui/react-avatar'
 import { Session } from 'next-auth'
 
