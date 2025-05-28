@@ -17,10 +17,10 @@ import { useRouter } from "next/navigation";
 import { bookSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import ColorPicker from "@/components/admin/ColorPicker";
-import { createBook } from "@/lib/admin/actions/book";
 import { toast } from "@/hooks/use-toast";
 import FileUpload from '@/components/FileUpload';
+import { createBook } from '@/lib/admin/actions/book';
+import ColorPicker from '../ColorPicker';
 
 interface Props extends Partial<Book> {
   type?: "create" | "update";
