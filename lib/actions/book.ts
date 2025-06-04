@@ -4,6 +4,7 @@ import { db } from '@/database/drizzle'
 import { books, borrowRecords } from '@/database/schema'
 import { eq } from 'drizzle-orm'
 import dayjs from 'dayjs'
+import { stringify } from '../utils'
 
 export const borrowBook = async (params: BorrowBookParams) => {
   const { userId, bookId } = params
@@ -33,7 +34,7 @@ export const borrowBook = async (params: BorrowBookParams) => {
 
     return {
       success: true,
-      data: JSON.parse(JSON.stringify(record))
+      data: JSON.parse(stringify(record))
     }
   } catch (error) {
     console.log(error)

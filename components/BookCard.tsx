@@ -5,7 +5,10 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 
 
-const BookCard = ({ id, title, genre, coverColor, coverUrl, isLoanedBook = false }: Book) => {
+const BookCard = ({ id, title, genre, coverColor, coverUrl }: Book) => {
+
+  let isLoanedBook = false
+
   return (
     <li className={cn(isLoanedBook && 'xs:w-52 w-full')}>
       <Link href={`/books/${id}`} className={cn(isLoanedBook && 'w-full flex flex-col items-center')}>

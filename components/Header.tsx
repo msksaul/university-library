@@ -1,16 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { Button } from './ui/button'
 import { signOut } from '@/auth'
 
 
 const Header = () => {
 
-  const pathname = usePathname()
-
   return (
-    <header className='my-10 justify-between gap-5'>
+    <header className='my-10 flex justify-between gap-5'>
       <Link href={'/'}>
         <Image src={'/icons/logo.svg'} alt='logo' width={40} height={40}/>
       </Link>
