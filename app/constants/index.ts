@@ -198,3 +198,5 @@ export const sampleBooks = [
     createdAt: new Date(Date.UTC(2025, 4, 29, 23, 47, 38, 124))
     },
 ];
+
+export const TEST_EMAIL = 'msksaul@gmail.com'

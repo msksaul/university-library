@@ -3,6 +3,7 @@ import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import { sendEmail } from "@/lib/workflow";
+import { TEST_EMAIL } from '@/app/constants';
 
 type UserState = "non-active" | "active";
 
@@ -39,7 +40,8 @@ const getUserState = async (email: string): Promise<UserState> => {
 };
 
 export const { POST } = serve<InitialData>(async (context) => {
-  const { email, fullName } = context.requestPayload;
+  const { fullName } = context.requestPayload;
+  const email = TEST_EMAIL
 
   // Welcome Email
   await context.run("new-signup", async () => {
