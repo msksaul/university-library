@@ -11,8 +11,8 @@ const SignIn = () => {
       type='SIGN_IN'
       schema={signInSchema}
       defaultValues={{
-        email: '',
-        password: ''
+        email: 'hello@calel.dev',
+        password: 'arcf133x'
       }}
       onSubmit={signInWithCredentials}
     />
